@@ -5,17 +5,26 @@
 ## Makefile
 ##
 
-SRC	=	app/
+##
+## EPITECH PROJECT, 2019
+## FUN_deBruijn_2018
+## File description:
+## Makefile
+##
+
+SOURCES	=	app/
+
+ROOT	=	./
 
 NAME	=	deBruijn
 
-CC	=	stack
+CC		= 	stack
 
 all:	$(NAME)
 
 $(NAME):
 	@$(CC) build
-	@cp 'stack path --local-install-root'/bin/deBruijn-exe ./$@
+	@cp `stack path --local-install-root`/bin/deBruijn-exe $(ROOT)$@
 
 setup:
 	$(CC) setup
@@ -23,9 +32,9 @@ setup:
 clean:
 	$(CC) clean
 
-fclean: clean
+fclean:	clean
 	rm -f $(NAME)
 
-re:	fclean all
+re: fclean all
 
-.PHONY:	clean fclean re
+.PHONY: clean fclean re
