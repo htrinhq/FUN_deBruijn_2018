@@ -1,0 +1,270 @@
+
+==================== FINAL INTERFACE ====================
+2019-02-27 14:15:24.003678 UTC
+
+interface main:Main 8044
+  interface hash: 6e6c2c48ed5f178fffb2a932aa802332
+  ABI hash: 7aa76bc9064b05eeab713a7bc98e2b26
+  export-list hash: 4a6099b529318fe008dd4db6b0ad3ecd
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 926aa6a27a4d971368986cd7889ba071
+  opt_hash: 14e536840aca4e889cad654e6f9b79c1
+  hpc_hash: 93b885adfe0da089cdf634904fd59f71
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Main.checkNumber
+  Main.exit
+  Main.exitError
+  Main.isNumeric
+  Main.main
+  Main.parse
+  Main.usage
+module dependencies:
+package dependencies: base-4.11.1.0* deBruijn-0.1.0.0
+                      ghc-prim-0.5.2.0 integer-gmp-1.0.2.0
+orphans: base-4.11.1.0:GHC.Float base-4.11.1.0:GHC.Base
+family instance modules: base-4.11.1.0:Control.Applicative
+                         base-4.11.1.0:Data.Functor.Const
+                         base-4.11.1.0:Data.Functor.Identity base-4.11.1.0:Data.Monoid
+                         base-4.11.1.0:Data.Semigroup.Internal base-4.11.1.0:GHC.Generics
+                         base-4.11.1.0:GHC.IO.Exception
+import  -/  base-4.11.1.0:GHC.Base 604111500e81281298777e721c75643b
+import  -/  base-4.11.1.0:GHC.IO.Exception acc060dca2e46d8b8275d06ee7d5d60d
+import  -/  base-4.11.1.0:GHC.Natural 8647cd09d4aefcb1ec93a2d9a92f1f1a
+import  -/  base-4.11.1.0:Numeric.Natural da273ddb373e0510fde98e17e4aa338f
+import  -/  base-4.11.1.0:Prelude 0750c25585e2b797cd78291d423d39dd
+import  -/  base-4.11.1.0:System.Environment 06420d98d10ee04b8dda9c0d88032c55
+import  -/  base-4.11.1.0:System.Exit a7af6f90beaa15182d3a20667d878df0
+import  -/  base-4.11.1.0:System.IO e02b6055b5362a3eac04f83991602a53
+import  -/  base-4.11.1.0:Text.Read 6c02630607b565ffcb34e8127673989b
+import  -/  deBruijn-0.1.0.0:Lib 2f61ee9c4960e81199b9dc60bb148631
+import  -/  ghc-prim-0.5.2.0:GHC.Classes 122abfcd7450c6c11602933c9ca5f80d
+import  -/  ghc-prim-0.5.2.0:GHC.Types d9b3023de7feae4a5308d643da5543f7
+be86c9d078d3acbf19ba91fe74a24273
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module Main.$trModule3 Main.$trModule1) -}
+b09d86f2c49dd5176b544d8d13ddb6c5
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$trModule2) -}
+e5875966b74dad2d29772660b8a75e33
+  $trModule2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Main"#) -}
+23b03bd7d075a00f5ad1ee10e6add7b8
+  $trModule3 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$trModule4) -}
+d026be77cb9ced20e35a61514e0458aa
+  $trModule4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("main"#) -}
+00a9031d3b460dedb3ad16dec346927e
+  checkNumber :: GHC.Base.String -> GHC.Types.IO GHC.Base.String
+  {- Arity: 2, Strictness: <L,U><S,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.checkNumber1
+                  `cast`
+                (<GHC.Base.String>_R
+                 ->_R Sym (GHC.Types.N:IO[0] <GHC.Base.String>_R)) -}
+803ed87e83de47a1e254175eca4c838d
+  checkNumber1 ::
+    GHC.Base.String
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, GHC.Base.String #)
+  {- Arity: 2, Strictness: <L,U><S,U>,
+     Unfolding: (\ (n :: GHC.Base.String)
+                   (eta :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case GHC.Natural.$fReadNatural_go
+                        (Text.ParserCombinators.ReadP.run
+                           @ GHC.Integer.Type.Integer
+                           Main.checkNumber9
+                           n) of wild {
+                   []
+                   -> case GHC.IO.Handle.Text.hPutStr2
+                             GHC.IO.Handle.FD.stdout
+                             Main.checkNumber7
+                             GHC.Types.True
+                             eta of ds1 { (#,#) ipv ipv1 ->
+                      GHC.Prim.raiseIO#
+                        @ GHC.Exception.SomeException
+                        @ GHC.Base.String
+                        Main.checkNumber4
+                        ipv }
+                   : ds ds1
+                   -> case ds of wild1 { (,) ds2 ds3 ->
+                      case ds3 of wild2 {
+                        []
+                        -> case ds1 of wild3 {
+                             []
+                             -> case GHC.Classes.$fEqModule_$s$c==
+                                       n
+                                       Main.checkNumber2 of wild4 {
+                                  GHC.Types.False -> (# eta, n #)
+                                  GHC.Types.True
+                                  -> case GHC.IO.Handle.Text.hPutStr2
+                                            GHC.IO.Handle.FD.stdout
+                                            Main.checkNumber7
+                                            GHC.Types.True
+                                            eta of ds4 { (#,#) ipv ipv1 ->
+                                     GHC.Prim.raiseIO#
+                                       @ GHC.Exception.SomeException
+                                       @ GHC.Base.String
+                                       Main.checkNumber4
+                                       ipv } }
+                             : ipv ipv1
+                             -> case GHC.IO.Handle.Text.hPutStr2
+                                       GHC.IO.Handle.FD.stdout
+                                       Main.checkNumber7
+                                       GHC.Types.True
+                                       eta of ds4 { (#,#) ipv2 ipv3 ->
+                                GHC.Prim.raiseIO#
+                                  @ GHC.Exception.SomeException
+                                  @ GHC.Base.String
+                                  Main.checkNumber4
+                                  ipv2 } }
+                        : ipv ipv1
+                        -> case GHC.IO.Handle.Text.hPutStr2
+                                  GHC.IO.Handle.FD.stdout
+                                  Main.checkNumber7
+                                  GHC.Types.True
+                                  eta of ds4 { (#,#) ipv2 ipv3 ->
+                           GHC.Prim.raiseIO#
+                             @ GHC.Exception.SomeException
+                             @ GHC.Base.String
+                             Main.checkNumber4
+                             ipv2 } } } }) -}
+aabb55419ba66a4ad1bdd98d418d5192
+  checkNumber2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.checkNumber3) -}
+ef883b93551cf8330cc528ab53245edb
+  checkNumber3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("0"#) -}
+a0338e46032d34c500b52ad1c9377e55
+  checkNumber4 :: GHC.Exception.SomeException
+  {- Unfolding: (GHC.IO.Exception.$fExceptionExitCode_$ctoException
+                   Main.checkNumber5) -}
+7616e26f7f41180030c2c377631afea1
+  checkNumber5 :: GHC.IO.Exception.ExitCode
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.IO.Exception.ExitFailure Main.checkNumber6) -}
+9be07a3b257114524cdcab0ba56814a3
+  checkNumber6 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 84#) -}
+1ea44bf29d9d67380ae5c6318dc9677d
+  checkNumber7 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCStringUtf8# Main.checkNumber8) -}
+653c792a879398cea173109c88a79e0f
+  checkNumber8 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("USAGE: ./deBruijn n [a] [--check|--unique|--clean]\n\
+                 \\n\
+                 \\t--check\t\tcheck if a sequence is a de Bruijn sequence\n\
+                 \\t--unique\tcheck if 2 sequences are distinct de Bruijn sequences\n\
+                 \\t--clean\t\tlist cleaning\n\
+                 \\tn\t\torder of the sequence\n\
+                 \\ta\t\talphabet [def: \\226\\128\\15601\\226\\128\\157]"#) -}
+a539cf919eb8dd0d7ffc07984203fdd2
+  checkNumber9 ::
+    Text.ParserCombinators.ReadP.P GHC.Integer.Type.Integer
+  {- Unfolding: (GHC.Read.$fReadInteger_$sreadNumber
+                   GHC.Read.$fReadInteger2
+                   Text.ParserCombinators.ReadPrec.minPrec
+                   @ GHC.Integer.Type.Integer
+                   (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                      @ GHC.Integer.Type.Integer)) -}
+d5e7ffe1e989f298b8007f26eb1e5d33
+  exit :: GHC.Types.IO a
+  {- Arity: 1, Strictness: <B,U>x,
+     Unfolding: InlineRule (0, True, True)
+                System.Exit.exitSuccess1
+                  `cast`
+                (forall (a :: <*>_N). Sym (GHC.Types.N:IO[0] <a>_R)) -}
+a1c528d1d951892965bd93317d77e3b1
+  exitError :: GHC.Types.IO a
+  {- Arity: 1, Strictness: <B,U>x,
+     Unfolding: InlineRule (0, True, True)
+                Main.exitError1
+                  `cast`
+                (forall (a :: <*>_N). Sym (GHC.Types.N:IO[0] <a>_R)) -}
+ef65a7099033a402449c2b4dcf1d0d91
+  exitError1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, a #)
+  {- Arity: 1, Strictness: <B,U>x -}
+0a4781f0557776b857ce1552c81e9a8c
+  isNumeric :: GHC.Base.String -> GHC.Types.Bool
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ (str :: GHC.Base.String) ->
+                 case GHC.Natural.$fReadNatural_go
+                        (Text.ParserCombinators.ReadP.run
+                           @ GHC.Integer.Type.Integer
+                           Main.checkNumber9
+                           str) of wild {
+                   [] -> GHC.Types.False
+                   : ds ds1
+                   -> case ds of wild1 { (,) ds2 ds3 ->
+                      case ds3 of wild2 {
+                        []
+                        -> case ds1 of wild3 {
+                             [] -> GHC.Types.True : ipv ipv1 -> GHC.Types.False }
+                        : ipv ipv1 -> GHC.Types.False } } }) -}
+1d204552cd1e75806457f95593903f60
+  main :: GHC.Types.IO ()
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
+5fc866327d1ccea486ed5f1e67e000fa
+  main1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case (Foreign.Marshal.Alloc.allocaBytesAligned
+                         @ Foreign.C.Types.CInt
+                         @ [GHC.Base.String]
+                         Foreign.Storable.$fStorableBool7
+                         Foreign.Storable.$fStorableBool7
+                         System.Environment.getArgs1
+                           `cast`
+                         (<GHC.Ptr.Ptr Foreign.C.Types.CInt>_R
+                          ->_R Sym (GHC.Types.N:IO[0] <[GHC.Base.String]>_R)))
+                        `cast`
+                      (GHC.Types.N:IO[0] <[GHC.Base.String]>_R)
+                        s of ds1 { (#,#) ipv ipv1 ->
+                 (Main.parse @ () ipv1) `cast` (GHC.Types.N:IO[0] <()>_R) ipv }) -}
+07c83632ca6f5fa0b7a4306a78a93676
+  main2 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1,
+     Unfolding: (GHC.TopHandler.runMainIO1
+                   @ ()
+                   Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R))) -}
+4fed0b9059bb2346f4515d0efcb3c94b
+  parse :: [[GHC.Types.Char]] -> GHC.Types.IO b
+  {- Arity: 1, Strictness: <S,1*U> -}
+04d0e64f7ba5db95c2b666b0296a81e6
+  usage :: GHC.Types.IO ()
+  {- Arity: 1,
+     Unfolding: InlineRule (0, True, True)
+                Main.usage1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
+37decca73f71d691c95b1f2a91938783
+  usage1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1,
+     Unfolding: (GHC.IO.Handle.Text.hPutStr2
+                   GHC.IO.Handle.FD.stdout
+                   Main.checkNumber7
+                   GHC.Types.True) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+
