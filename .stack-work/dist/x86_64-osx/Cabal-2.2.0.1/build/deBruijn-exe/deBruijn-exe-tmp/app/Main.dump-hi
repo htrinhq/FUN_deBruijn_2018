@@ -1,11 +1,11 @@
 
 ==================== FINAL INTERFACE ====================
-2019-02-27 14:15:24.003678 UTC
+2019-03-01 14:07:30.863216 UTC
 
 interface main:Main 8044
-  interface hash: 6e6c2c48ed5f178fffb2a932aa802332
-  ABI hash: 7aa76bc9064b05eeab713a7bc98e2b26
-  export-list hash: 4a6099b529318fe008dd4db6b0ad3ecd
+  interface hash: 53fbfd4384a6f6664ae38544e30c0435
+  ABI hash: da86139b61255b9a1c6f7c4bee712e1c
+  export-list hash: 2ee45ccfacaf644a1597fd8119ea54de
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 926aa6a27a4d971368986cd7889ba071
   opt_hash: 14e536840aca4e889cad654e6f9b79c1
@@ -14,12 +14,14 @@ interface main:Main 8044
   used TH splices: False
   where
 exports:
+  Main.allUnique
   Main.checkNumber
   Main.exit
   Main.exitError
   Main.isNumeric
   Main.main
   Main.parse
+  Main.rotate
   Main.usage
 module dependencies:
 package dependencies: base-4.11.1.0* deBruijn-0.1.0.0
@@ -30,8 +32,12 @@ family instance modules: base-4.11.1.0:Control.Applicative
                          base-4.11.1.0:Data.Functor.Identity base-4.11.1.0:Data.Monoid
                          base-4.11.1.0:Data.Semigroup.Internal base-4.11.1.0:GHC.Generics
                          base-4.11.1.0:GHC.IO.Exception
+import  -/  base-4.11.1.0:Data.Char 3e89818e2b8ef1a2cc5393163484da72
+import  -/  base-4.11.1.0:Data.Foldable 8ed35c38958063956af33c935ea03444
+import  -/  base-4.11.1.0:Data.List 83dc843e47bfc0c5af51e19c6f3476d5
 import  -/  base-4.11.1.0:GHC.Base 604111500e81281298777e721c75643b
 import  -/  base-4.11.1.0:GHC.IO.Exception acc060dca2e46d8b8275d06ee7d5d60d
+import  -/  base-4.11.1.0:GHC.List 1e4357702d8d00cded0703bd293e50e8
 import  -/  base-4.11.1.0:GHC.Natural 8647cd09d4aefcb1ec93a2d9a92f1f1a
 import  -/  base-4.11.1.0:Numeric.Natural da273ddb373e0510fde98e17e4aa338f
 import  -/  base-4.11.1.0:Prelude 0750c25585e2b797cd78291d423d39dd
@@ -41,7 +47,6 @@ import  -/  base-4.11.1.0:System.IO e02b6055b5362a3eac04f83991602a53
 import  -/  base-4.11.1.0:Text.Read 6c02630607b565ffcb34e8127673989b
 import  -/  deBruijn-0.1.0.0:Lib 2f61ee9c4960e81199b9dc60bb148631
 import  -/  ghc-prim-0.5.2.0:GHC.Classes 122abfcd7450c6c11602933c9ca5f80d
-import  -/  ghc-prim-0.5.2.0:GHC.Types d9b3023de7feae4a5308d643da5543f7
 be86c9d078d3acbf19ba91fe74a24273
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -60,6 +65,44 @@ e5875966b74dad2d29772660b8a75e33
 d026be77cb9ced20e35a61514e0458aa
   $trModule4 :: GHC.Prim.Addr#
   {- HasNoCafRefs, Unfolding: ("main"#) -}
+6be4e9e86970ecbd046c8a6477f95ea1
+  $wrotate :: GHC.Prim.Int# -> GHC.Base.String -> [GHC.Types.Char]
+  {- Arity: 2, Strictness: <S,U><S,1*U>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#) (w :: GHC.Base.String) ->
+                 case GHC.Prim.<=# ww 0# of lwild {
+                   DEFAULT
+                   -> case w of wild {
+                        [] -> Main.rotate1
+                        : ipv ipv1
+                        -> case ww of ds1 {
+                             DEFAULT
+                             -> case GHC.List.splitAt_$s$wsplitAt'
+                                       @ GHC.Types.Char
+                                       ipv1
+                                       (GHC.Prim.-# ds1 1#) of ww1 { (#,#) ww2 ww3 ->
+                                GHC.Base.++
+                                  @ GHC.Types.Char
+                                  ww3
+                                  (GHC.Types.: @ GHC.Types.Char ipv ww2) }
+                             1#
+                             -> GHC.Base.++
+                                  @ GHC.Types.Char
+                                  ipv1
+                                  (GHC.Types.:
+                                     @ GHC.Types.Char
+                                     ipv
+                                     (GHC.Types.[] @ GHC.Types.Char)) } }
+                   1#
+                   -> GHC.Base.++
+                        @ GHC.Types.Char
+                        w
+                        (GHC.Types.[] @ GHC.Types.Char) }) -}
+fc95e071d44b83c9f0864b450eb74209
+  allUnique :: GHC.Classes.Eq a => [a] -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U(C(C1(U)),A)><S,1*U> -}
+52731dd9bef5ee250d0776120d2de659
+  allUnique_$sallUnique :: [GHC.Types.Char] -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
 00a9031d3b460dedb3ad16dec346927e
   checkNumber :: GHC.Base.String -> GHC.Types.IO GHC.Base.String
   {- Arity: 2, Strictness: <L,U><S,U>,
@@ -210,18 +253,20 @@ ef65a7099033a402449c2b4dcf1d0d91
                         -> case ds1 of wild3 {
                              [] -> GHC.Types.True : ipv ipv1 -> GHC.Types.False }
                         : ipv ipv1 -> GHC.Types.False } } }) -}
-1d204552cd1e75806457f95593903f60
-  main :: GHC.Types.IO ()
+1f927831394b4002a821631dbff7646e
+  main :: GHC.Types.IO b
   {- Arity: 1, Strictness: <S,U>,
      Unfolding: InlineRule (0, True, True)
-                Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-5fc866327d1ccea486ed5f1e67e000fa
+                Main.main1
+                  `cast`
+                (forall (b :: <*>_N). Sym (GHC.Types.N:IO[0] <b>_R)) -}
+d450fe943c1dd151d5919d09c24da230
   main1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
-    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, b #)
   {- Arity: 1, Strictness: <S,U>,
      Unfolding: InlineRule (1, True, False)
-                (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                (\ @ b (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
                  case (Foreign.Marshal.Alloc.allocaBytesAligned
                          @ Foreign.C.Types.CInt
                          @ [GHC.Base.String]
@@ -234,18 +279,43 @@ ef65a7099033a402449c2b4dcf1d0d91
                         `cast`
                       (GHC.Types.N:IO[0] <[GHC.Base.String]>_R)
                         s of ds1 { (#,#) ipv ipv1 ->
-                 (Main.parse @ () ipv1) `cast` (GHC.Types.N:IO[0] <()>_R) ipv }) -}
-07c83632ca6f5fa0b7a4306a78a93676
+                 Main.main2 @ b ipv1 ipv }) -}
+01bc422e1084f3332ebb5b41d87ee5bd
   main2 ::
+    [[GHC.Types.Char]]
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, b #)
+  {- Arity: 2, Strictness: <S,1*U><S,U> -}
+8294ee88954175f93f54d56640108500
+  main3 ::
     GHC.Prim.State# GHC.Prim.RealWorld
-    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, GHC.Types.Any #)
   {- Arity: 1,
      Unfolding: (GHC.TopHandler.runMainIO1
-                   @ ()
-                   Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R))) -}
-4fed0b9059bb2346f4515d0efcb3c94b
+                   @ GHC.Types.Any
+                   (Main.main1 @ GHC.Types.Any)
+                     `cast`
+                   (Sym (GHC.Types.N:IO[0] <GHC.Types.Any>_R))) -}
+9bb6b1a27c9b8971a5aa07b053b8c52e
   parse :: [[GHC.Types.Char]] -> GHC.Types.IO b
-  {- Arity: 1, Strictness: <S,1*U> -}
+  {- Arity: 2, Strictness: <S,1*U><S,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.main2
+                  `cast`
+                (forall (b :: <*>_N).
+                 <[[GHC.Types.Char]]>_R ->_R Sym (GHC.Types.N:IO[0] <b>_R)) -}
+1d45a05f05d759624dadc62606bee253
+  rotate :: GHC.Types.Int -> GHC.Base.String -> GHC.Base.String
+  {- Arity: 2, Strictness: <S(S),1*U(U)><S,1*U>, Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: GHC.Types.Int) (w1 :: GHC.Base.String) ->
+                 case w of ww { GHC.Types.I# ww1 -> Main.$wrotate ww1 w1 }) -}
+5432536d5ed5358d6e1bd3a55e05a34d
+  rotate1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.Base.++
+                   @ GHC.Types.Char
+                   (GHC.Types.[] @ GHC.Types.Char)
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
 04d0e64f7ba5db95c2b666b0296a81e6
   usage :: GHC.Types.IO ()
   {- Arity: 1,
@@ -260,6 +330,9 @@ ef65a7099033a402449c2b4dcf1d0d91
                    GHC.IO.Handle.FD.stdout
                    Main.checkNumber7
                    GHC.Types.True) -}
+"SPEC allUnique @ Char" forall ($dEq :: GHC.Classes.Eq
+                                          GHC.Types.Char)
+  Main.allUnique @ GHC.Types.Char $dEq = Main.allUnique_$sallUnique
 vectorised variables:
 vectorised tycons:
 vectorised reused tycons:
