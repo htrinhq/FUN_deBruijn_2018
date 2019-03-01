@@ -19,11 +19,11 @@ main = do
     getArgs >>= parse
 
 parse [n, alphabet, "--check"] = do
-    checkNumber n
+    nb <- checkNumber n
     if allUnique alphabet == True
         then do
             input <- getLine
-            if checkInput input alphabet == True
+            if checkInput input alphabet == True && getRealLen input nb == length input
                 then do
                     putStrLn "OK"
                     exit
@@ -47,8 +47,13 @@ parse [n, alphabet, "--clean"] = do
         else usage >> exitError
 
 parse [n, "--check"] = do
-    checkNumber n
-    exit
+    nb <- checkNumber n
+    input <- getLine
+    if checkInput input "01" == True && getRealLen input nb == length input
+        then do
+            putStrLn "OK"
+            exit
+        else putStrLn "KO" >> exit
 
 parse [n, "--unique"] = do
     checkNumber n
@@ -69,6 +74,9 @@ parse otherwise = do
 rotate :: String -> String
 rotate xs = bs ++ as where (as, bs) = splitAt 1 xs
 
+getRealLen :: [Char] -> Natural -> Int
+getRealLen str n = (length str) ^ n
+
 checkInput :: [Char] -> String -> Bool
 checkInput []  alphabet = True
 checkInput (x:xs) alphabet
@@ -87,7 +95,7 @@ exitError   =   exitWith (ExitFailure 84)
 exit    =   exitWith ExitSuccess
 
 checkNumber n = do
-    if isNumeric n == True && n /= "0" then return n else usage >> exitError
+    if isNumeric n == True && n /= "0" then return (read n :: Natural) else usage >> exitError
 
 isNumeric :: String -> Bool
 isNumeric str =
