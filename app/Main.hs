@@ -14,31 +14,55 @@ import Numeric.Natural
 import Data.List
 import Data.Char
 
---main :: IO ()
+main :: IO ()
 main = do
     getArgs >>= parse
 
 parse [n, alphabet, "--check"] = do
-    print "check"
     checkNumber n
     if allUnique alphabet == True
         then do
+            print "check"
             let x = rotate 1 alphabet
+            print x
             exit
         else usage >> exitError
 
 parse [n, alphabet, "--unique"] = do
-    print "unique"
     checkNumber n
-    exit
-parse [n, alphabet, "--clean"] = print "clean" >> checkNumber n >> exit
+    if allUnique alphabet == True
+        then do
+            print "unique"
+            exit
+        else usage >> exitError
+
+parse [n, alphabet, "--clean"] = do
+    checkNumber n
+    if allUnique alphabet == True
+        then do
+            print "clean"
+            exit
+        else usage >> exitError
+
 parse [n, "--check"] = do
     checkNumber n
     exit
-parse [n, "--unique"] = checkNumber n >> exit
-parse [n, "--clean"] = checkNumber n >> exit
-parse ["-h"] = usage >> exit
-parse otherwise = usage >> exitError
+
+parse [n, "--unique"] = do
+    checkNumber n
+    exit
+
+parse [n, "--clean"] = do
+    checkNumber n
+    exit
+
+parse ["-h"] = do
+    usage
+    exit
+
+parse otherwise = do
+    usage
+    exitError
 
 rotate :: Int -> String -> String
 rotate n xs = bs ++ as where (as, bs) = splitAt n xs
