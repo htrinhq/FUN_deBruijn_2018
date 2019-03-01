@@ -22,10 +22,12 @@ parse [n, alphabet, "--check"] = do
     checkNumber n
     if allUnique alphabet == True
         then do
-            print "check"
-            let x = rotate 1 alphabet
-            print x
-            exit
+            input <- getLine
+            if checkInput input alphabet == True
+                then do
+                    putStrLn "OK"
+                    exit
+                else putStrLn "KO" >> exit
         else usage >> exitError
 
 parse [n, alphabet, "--unique"] = do
@@ -64,10 +66,16 @@ parse otherwise = do
     usage
     exitError
 
-rotate :: Int -> String -> String
-rotate n xs = bs ++ as where (as, bs) = splitAt n xs
+rotate :: String -> String
+rotate xs = bs ++ as where (as, bs) = splitAt 1 xs
 
-allUnique ::(Eq a) => [a] -> Bool
+checkInput :: [Char] -> String -> Bool
+checkInput []  alphabet = True
+checkInput (x:xs) alphabet
+    | x `elem` alphabet && checkInput xs alphabet = True
+    | otherwise = False
+
+allUnique :: (Eq a) => [a] -> Bool
 allUnique [] = True
 allUnique(x:xs)
     | x `notElem` xs && allUnique xs = True
