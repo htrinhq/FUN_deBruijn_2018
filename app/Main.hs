@@ -23,7 +23,7 @@ parse [n, alphabet, "--check"] = do
     if allUnique alphabet == True
         then do
             input <- getLine
-            if checkInput input alphabet == True && getRealLen input nb == length input
+            if checkInput input alphabet == True && getRealLen alphabet nb == length input
                 then do
                     putStrLn "OK"
                     exit
@@ -49,7 +49,7 @@ parse [n, alphabet, "--clean"] = do
 parse [n, "--check"] = do
     nb <- checkNumber n
     input <- getLine
-    if checkInput input "01" == True && getRealLen input nb == length input
+    if checkInput input "01" == True && getRealLen "01" nb == length input
         then do
             putStrLn "OK"
             exit
