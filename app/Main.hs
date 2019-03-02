@@ -31,7 +31,12 @@ parse [n, alphabet, "--check"] = do
 parse [n, alphabet, "--unique"] = do
     let nb = fromJust $ checkNumber n
     if allUnique alphabet
-        then print "unique"
+        then do
+            input1 <- getLine
+            input2 <- getLine
+            if check input1 alphabet nb && check input2 alphabet nb && isUnique input1 input2 0
+                then putStrLn "OK"
+                else putStrLn "KO"
         else usage >> exitError
 
 parse [n, alphabet, "--clean"] = do
@@ -50,7 +55,16 @@ parse [n, "--check"] = do
                 else putStrLn "KO"
         else usage >> exitError
 
-parse [n, "--unique"] = usage
+parse [n, "--unique"] = do
+    let nb = fromJust $ checkNumber n
+    if allUnique "01"
+        then do
+            input1 <- getLine
+            input2 <- getLine
+            if check input1 "01" nb && check input2 "01" nb && isUnique input1 input2 0
+                then putStrLn "OK"
+                else putStrLn "KO"
+        else usage >> exitError
 
 parse [n, "--clean"] = usage
 
@@ -63,6 +77,11 @@ check input alphabet nb = checkInput input alphabet && len == length input && le
     where list = nub $ createTab input nb []
           len = getRealLen alphabet nb
 
+isUnique :: String -> String -> Int -> Bool
+isUnique input1 input2 x
+    | x >= length input1 = True
+    | input1 == input2 = False
+    | otherwise = isUnique input1 (rotate input2) (x + 1)
 
 createTab :: String -> Int -> [String] -> [String]
 createTab str nb list
