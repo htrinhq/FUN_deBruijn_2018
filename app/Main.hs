@@ -10,95 +10,99 @@ module Main where
 import Lib
 import System.Environment
 import System.Exit
-import Numeric.Natural
 import Data.List
 import Data.Char
+import Data.Maybe
+import Text.Read
 
 main :: IO ()
-main = do
-    getArgs >>= parse
+main = getArgs >>= parse
 
 parse [n, alphabet, "--check"] = do
-    nb <- checkNumber n
-    if allUnique alphabet == True
+    let nb = fromJust $ checkNumber n
+    if allUnique alphabet
         then do
             input <- getLine
-            if checkInput input alphabet == True && getRealLen alphabet nb == length input
-                then do
-                    putStrLn "OK"
-                    exit
-                else putStrLn "KO" >> exit
+            if check input alphabet nb
+                then putStrLn "OK"
+                else putStrLn "KO"
         else usage >> exitError
 
 parse [n, alphabet, "--unique"] = do
-    checkNumber n
-    if allUnique alphabet == True
-        then do
-            print "unique"
-            exit
+    let nb = fromJust $ checkNumber n
+    if allUnique alphabet
+        then print "unique"
         else usage >> exitError
 
 parse [n, alphabet, "--clean"] = do
-    checkNumber n
-    if allUnique alphabet == True
-        then do
-            print "clean"
-            exit
+    let nb = fromJust $ checkNumber n
+    if allUnique alphabet
+        then print "clean"
         else usage >> exitError
 
 parse [n, "--check"] = do
-    nb <- checkNumber n
-    input <- getLine
-    if checkInput input "01" == True && getRealLen "01" nb == length input
+    let nb = fromJust $ checkNumber n
+    if allUnique "01"
         then do
-            putStrLn "OK"
-            exit
-        else putStrLn "KO" >> exit
+            input <- getLine
+            if check input "01" nb
+                then putStrLn "OK"
+                else putStrLn "KO"
+        else usage >> exitError
 
-parse [n, "--unique"] = do
-    checkNumber n
-    exit
+parse [n, "--unique"] = usage
 
-parse [n, "--clean"] = do
-    checkNumber n
-    exit
+parse [n, "--clean"] = usage
 
-parse ["-h"] = do
-    usage
-    exit
+parse ["-h"] = usage
 
-parse otherwise = do
-    usage
-    exitError
+parse otherwise = usage >> exitError
+
+check :: String -> String -> Int -> Bool
+check input alphabet nb = checkInput input alphabet && len == length input && length list == len
+    where list = nub $ createTab input nb []
+          len = getRealLen alphabet nb
+
+
+createTab :: String -> Int -> [String] -> [String]
+createTab str nb list
+    | list == [] = createTab (str ++ (take (nb) str)) nb ((take nb str) : list)
+    | length str < nb = list
+    | otherwise = createTab (tail str) nb ((take nb str) : list)
 
 rotate :: String -> String
 rotate xs = bs ++ as where (as, bs) = splitAt 1 xs
 
-getRealLen :: [Char] -> Natural -> Int
+getRealLen :: [Char] -> Int -> Int
 getRealLen str n = (length str) ^ n
 
-checkInput :: [Char] -> String -> Bool
-checkInput []  alphabet = True
-checkInput (x:xs) alphabet
-    | x `elem` alphabet && checkInput xs alphabet = True
-    | otherwise = False
+checkInput :: String -> String -> Bool
+checkInput [] alphabet = True
+checkInput (x:xs) alphabet = x `elem` alphabet && checkInput xs alphabet
 
 allUnique :: (Eq a) => [a] -> Bool
 allUnique [] = True
-allUnique(x:xs)
-    | x `notElem` xs && allUnique xs = True
-    | otherwise = False
+allUnique(x:xs) = x `notElem` xs && allUnique xs
 
 usage = putStrLn "USAGE: ./deBruijn n [a] [--check|--unique|--clean]\n\n\t--check\t\tcheck if a sequence is a de Bruijn sequence\n\t--unique\tcheck if 2 sequences are distinct de Bruijn sequences\n\t--clean\t\tlist cleaning\n\tn\t\torder of the sequence\n\ta\t\talphabet [def: “01”]"
 
 exitError   =   exitWith (ExitFailure 84)
 exit    =   exitWith ExitSuccess
 
-checkNumber n = do
-    if isNumeric n == True && n /= "0" then return (read n :: Natural) else usage >> exitError
+checkRead :: Maybe Int -> Maybe Int
+checkRead mnb =
+    if fromJust mnb >= 0
+        then mnb
+        else Nothing
+
+checkNumber :: String -> Maybe Int
+checkNumber n =
+    if isNumeric n  && n /= "0"
+        then checkRead (readMaybe n)
+        else Nothing
 
 isNumeric :: String -> Bool
 isNumeric str =
-    case (reads str) :: [(Natural, String)] of
+    case (reads str) :: [(Int, String)] of
     [(_, "")]  ->  True
     _   ->  False
