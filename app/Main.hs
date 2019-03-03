@@ -89,22 +89,19 @@ deBruijn nb alphabet = do
     putStrLn (reverse list)
 
 createSuit :: String -> String -> Int -> String
-createSuit alphabet list nb = do
-    if (length list) < nb
-        then createSuit alphabet (list ++ [(head alphabet)]) nb
-        else list
+createSuit alphabet list nb
+    | length list < nb = createSuit alphabet (list ++ [(head alphabet)]) nb
+    | otherwise = list
 
 deBruijnGen :: String -> String -> Int -> Int -> String
-deBruijnGen alphabet list nb max = do
-    if (length list) < max
-        then deBruijnGen alphabet (list ++ (fillDeBruijnSuit list alphabet nb)) nb max
-        else list
+deBruijnGen alphabet list nb max
+    | length list < max = deBruijnGen alphabet (list ++ (fillDeBruijnSuit list alphabet nb)) nb max
+    | otherwise = list
 
 fillDeBruijnSuit :: String -> String -> Int -> String
-fillDeBruijnSuit list alphabet nb = do
-    if isInfixOf ((drop ((length list) - (nb - 1)) list) ++ [last alphabet]) list
-        then [head alphabet]
-        else [last alphabet]
+fillDeBruijnSuit list alphabet nb
+    | isInfixOf ((drop ((length list) - (nb - 1)) list) ++ [last alphabet]) list = [head alphabet]
+    | otherwise = [last alphabet]
 
 printTab :: [String] -> IO ()
 printTab (x:xs)
