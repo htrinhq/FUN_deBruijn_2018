@@ -20,10 +20,7 @@ import Data.Maybe
 import Text.Read
 
 deBruijn :: Int -> String -> IO ()
-deBruijn nb alphabet = do
-    let max = getRealLen alphabet nb
-    let list = deBruijnGen alphabet (createSuit alphabet [] nb) nb max
-    putStrLn (reverse list)
+deBruijn nb alphabet = putStrLn $ reverse $ deBruijnGen alphabet (createSuit alphabet [] nb) nb (getRealLen alphabet nb)
 
 createSuit :: String -> String -> Int -> String
 createSuit alphabet list nb
