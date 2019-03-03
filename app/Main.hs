@@ -40,7 +40,15 @@ parse [n, alphabet, "--unique"] = do
 parse [n, alphabet, "--clean"] = do
     let nb = fromJust $ checkNumber n
     if allUnique alphabet
-        then print "clean"
+        then do
+            inputs <- arrayFromInput []
+            if inputs /= []
+                then do
+                    let filtered = filterTab inputs [] alphabet nb
+                    if filtered /= []
+                        then printTab filtered
+                        else exit
+                else exit
         else usage >> exitError
 parse [n, "--check"] = do
     let nb = fromJust $ checkNumber n
@@ -58,11 +66,26 @@ parse [n, "--unique"] = do
 parse [n, "--clean"] = do
     let nb = fromJust $ checkNumber n
     inputs <- arrayFromInput []
-    --let end = filter (check inputs "01" nb)
-    --filter (\x -> check x "01" nb) inputs
-    putStrLn "HEY!"
+    if inputs /= []
+        then do
+            let filtered = filterTab inputs [] "01" nb
+            if filtered /= []
+                then printTab filtered
+                else exit
+        else exit
 parse ["-h"] = usage
 parse otherwise = usage >> exitError
+
+printTab :: [String] -> IO ()
+printTab (x:xs)
+    | x == [] || xs == [] = exit
+    | otherwise = putStrLn x >> printTab xs
+
+filterTab :: [String] -> [String] -> String -> Int -> [String]
+filterTab (x:xs) filtered alphabet nb
+    | check x alphabet nb = filterTab xs (x : filtered) alphabet nb
+    | xs == [] =  reverse $ nub filtered
+    | otherwise = filterTab xs filtered alphabet nb
 
 arrayFromInput :: [String] -> IO [String]
 arrayFromInput list = do
