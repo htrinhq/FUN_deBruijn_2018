@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1d92a74f6053e09cef48711e8def3a8404bc8651b8086ea61e98b06467b50e94
+-- hash: dadd1f64847ced4d63409dac58d8098403ca226ff12a21483158d863e2cd6b22
 
 name:           deBruijn
 version:        0.1.0.0
@@ -39,6 +39,8 @@ library
 executable deBruijn-exe
   main-is: Main.hs
   other-modules:
+      Flags
+      Generation
       Paths_deBruijn
   hs-source-dirs:
       app
