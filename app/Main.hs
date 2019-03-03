@@ -16,6 +16,7 @@ import Data.Maybe
 import Text.Read
 import Generation
 import Flags
+import Utilities
 
 main :: IO ()
 main = getArgs >>= parse
