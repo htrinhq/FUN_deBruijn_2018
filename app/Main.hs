@@ -27,7 +27,6 @@ parse [n, alphabet, "--check"] = do
                 then putStrLn "OK"
                 else putStrLn "KO"
         else usage >> exitError
-
 parse [n, alphabet, "--unique"] = do
     let nb = fromJust $ checkNumber n
     if allUnique alphabet
@@ -38,39 +37,39 @@ parse [n, alphabet, "--unique"] = do
                 then putStrLn "OK"
                 else putStrLn "KO"
         else usage >> exitError
-
 parse [n, alphabet, "--clean"] = do
     let nb = fromJust $ checkNumber n
     if allUnique alphabet
         then print "clean"
         else usage >> exitError
-
 parse [n, "--check"] = do
     let nb = fromJust $ checkNumber n
-    if allUnique "01"
-        then do
-            input <- getLine
-            if check input "01" nb
-                then putStrLn "OK"
-                else putStrLn "KO"
-        else usage >> exitError
-
+    input <- getLine
+    if check input "01" nb
+        then putStrLn "OK"
+        else putStrLn "KO"
 parse [n, "--unique"] = do
     let nb = fromJust $ checkNumber n
-    if allUnique "01"
-        then do
-            input1 <- getLine
-            input2 <- getLine
-            if check input1 "01" nb && check input2 "01" nb && isUnique input1 input2 0
-                then putStrLn "OK"
-                else putStrLn "KO"
-        else usage >> exitError
-
-parse [n, "--clean"] = usage
-
+    input1 <- getLine
+    input2 <- getLine
+    if check input1 "01" nb && check input2 "01" nb && isUnique input1 input2 0
+        then putStrLn "OK"
+        else putStrLn "KO"
+parse [n, "--clean"] = do
+    let nb = fromJust $ checkNumber n
+    inputs <- arrayFromInput []
+    --let end = filter (check inputs "01" nb)
+    --filter (\x -> check x "01" nb) inputs
+    putStrLn "HEY!"
 parse ["-h"] = usage
-
 parse otherwise = usage >> exitError
+
+arrayFromInput :: [String] -> IO [String]
+arrayFromInput list = do
+    str <- getLine
+    if str == "END"
+        then return (reverse list)
+        else arrayFromInput (str : list)
 
 check :: String -> String -> Int -> Bool
 check input alphabet nb = checkInput input alphabet && len == length input && length list == len
@@ -123,5 +122,5 @@ checkNumber n =
 isNumeric :: String -> Bool
 isNumeric str =
     case (reads str) :: [(Int, String)] of
-    [(_, "")]  ->  True
-    _   ->  False
+    [(_, "")] -> True
+    _ -> False
