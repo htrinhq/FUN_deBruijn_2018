@@ -74,7 +74,37 @@ parse [n, "--clean"] = do
                 else exit
         else exit
 parse ["-h"] = usage
+parse [n] = do
+    let nb = fromJust $ checkNumber n
+    deBruijn nb "01"
+parse [n, alphabet] = do
+    let nb = fromJust $ checkNumber n
+    deBruijn nb alphabet
 parse otherwise = usage >> exitError
+
+deBruijn :: Int -> String -> IO ()
+deBruijn nb alphabet = do
+    let max = getRealLen alphabet nb
+    let list = deBruijnGen alphabet (createSuit alphabet [] nb) nb max
+    putStrLn (reverse list)
+
+createSuit :: String -> String -> Int -> String
+createSuit alphabet list nb = do
+    if (length list) < nb
+        then createSuit alphabet (list ++ [(head alphabet)]) nb
+        else list
+
+deBruijnGen :: String -> String -> Int -> Int -> String
+deBruijnGen alphabet list nb max = do
+    if (length list) < max
+        then deBruijnGen alphabet (list ++ (fillDeBruijnSuit list alphabet nb)) nb max
+        else list
+
+fillDeBruijnSuit :: String -> String -> Int -> String
+fillDeBruijnSuit list alphabet nb = do
+    if isInfixOf ((drop ((length list) - (nb - 1)) list) ++ [last alphabet]) list
+        then [head alphabet]
+        else [last alphabet]
 
 printTab :: [String] -> IO ()
 printTab (x:xs)
